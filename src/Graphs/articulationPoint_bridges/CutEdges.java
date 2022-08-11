@@ -1,4 +1,4 @@
-package com.practice.Graphs.articulationPoint_bridges;
+package Graphs.articulationPoint_bridges;
 
 import java.util.ArrayList;
 
