@@ -3,10 +3,12 @@ package Searching;
 public class LinearSearchRecursive {
 
     public static boolean search(int arr[],int i, int key){
+        //Base condition
         if(i==arr.length)
             return false;
         if(arr[i]==key)
             return true;
+        //Recursive relation (Tail recursion)
         return search(arr,i+1,key);
     }
     public static void main(String[] args) {
