@@ -44,8 +44,8 @@ public class LLImplRecursive {
         System.out.println(head.val);
         printLL(head.next);
     }
-    //Insert
-    private static ListNode insert(ListNode head, ListNode newNode) {
+    //Insert at end
+    private static ListNode insertAtTail(ListNode head, ListNode newNode) {
         //base
         if(head==null) {
             head=newNode;
@@ -55,9 +55,10 @@ public class LLImplRecursive {
             head.next=newNode;
             return head;
         }
-        insert(head.next,newNode);
+        insertAtTail(head.next,newNode);
         return head;
     }
+
     public static void main(String[] args) {
         ListNode n6=new ListNode(6,null);
         ListNode n5=new ListNode(5,n6);
@@ -80,7 +81,7 @@ public class LLImplRecursive {
         //insert
         System.out.println("---Insertion---");
         ListNode newNode=new ListNode(7,null);
-        head=insert(head,newNode);
+        head=insertAtTail(head,newNode);
         printLL(head);
     }
 }
