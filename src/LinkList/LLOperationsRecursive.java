@@ -10,7 +10,7 @@ class ListNode{
 }
 
 
-public class LLImplRecursive {
+public class LLOperationsRecursive {
     //Reverse
     public static ListNode reverse(ListNode head){
         //base-In the end we need to make last node as head so it should return last node to newNode
