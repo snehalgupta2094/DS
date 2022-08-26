@@ -9,7 +9,6 @@ public static void main(String[] args) {
 	list.insert(4);
 	list.insert(5);
 	Node head=reverseL(list.head);
-	//head=reverseLL(list.head);
 	printList(head);
 }
 public static void printList(Node head)
@@ -37,5 +36,4 @@ private static Node reverseL(Node head)
 	}
 	return prev;
 }
-
 }
