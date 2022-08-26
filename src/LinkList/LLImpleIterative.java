@@ -55,7 +55,7 @@ class LL{
     	}
     }
 }
-public class LinkedListImplementation 
+public class LLImpleIterative
 {
 	public static void main(String[] args) 
 	{
