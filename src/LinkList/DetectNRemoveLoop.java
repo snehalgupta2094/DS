@@ -2,6 +2,7 @@ package LinkList;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class DetectNRemoveLoop
 {
@@ -15,7 +16,24 @@ public class DetectNRemoveLoop
 	}
 	//Approach2: Floyd Warshall
 	public static void detectNRemoveLoop1(ListNode head){
-
+		ListNode slow=head.next;
+		ListNode fast=head.next.next;
+		ListNode prev=null;
+		while(slow!=null && fast!=null && fast.next!=null){
+			slow=slow.next;
+			fast=fast.next.next;
+			if(slow==fast)
+				break;
+		}
+		slow=head;
+		while(fast!=slow)
+		{
+			prev=fast;
+			fast=fast.next;
+			slow=slow.next;
+		}
+		System.out.println("Begining of loop: "+slow.val);
+               prev.next=null;
 	}
 	//Approach1: HashMap
 	public static void detectNRemoveLoop(ListNode head){
@@ -46,7 +64,11 @@ public class DetectNRemoveLoop
 		n6.next=n3;
 
 		//Approach1: HashMap
-		detectNRemoveLoop(head);
+	//	detectNRemoveLoop(head);
+	//	printLL(head);
+
+		//Approach2: Floyd
+		detectNRemoveLoop1(head);
 		printLL(head);
 	}
 }
