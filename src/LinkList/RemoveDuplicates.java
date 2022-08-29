@@ -15,8 +15,11 @@ public class RemoveDuplicates {
 		RemoveDuplicates.removeDuplicates(list.head);
 		list.printList();
 	}
-	
-	//selection sort
+	//Approach2: Merge sort
+
+	//Approach3: HashSet
+
+	//Approach1: Selection sort
 	public static void removeDuplicates(Node head)
 	{
 		Node temp1=head;
