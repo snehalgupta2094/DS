@@ -40,7 +40,7 @@ public class InfixToPostfix {
             }
             //operator
             else{
-                while (!st.empty() && preceedence(ch)<=preceedence(st.peek())){
+                while (!st.isEmpty() && preceedence(ch)<=preceedence(st.peek())){
                         output=output+st.pop();
                     }
                 st.push(ch);
