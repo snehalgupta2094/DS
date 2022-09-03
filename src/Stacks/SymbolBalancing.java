@@ -12,26 +12,12 @@ public class SymbolBalancing {
         {
             stack.push(s.charAt(i));
         }
-        else if(s.charAt(i)==')')
-        {
-            if(!stack.isEmpty() && stack.peek()=='(')
+        else if(!stack.isEmpty() && ((s.charAt(i)==')' && stack.peek()=='(')
+        || (s.charAt(i)==']' && stack.peek()=='[') || (s.charAt(i)=='}' && stack.peek()=='{'))){
                 stack.pop();
-            else
-                return "NO";
         }
-        else if(s.charAt(i)=='}')
-        {
-            if(!stack.isEmpty() && stack.peek()=='{')
-                stack.pop();
-            else
-                return "NO";
-        }
-        else if(s.charAt(i)==']')
-        {
-            if(!stack.isEmpty() && stack.peek()=='[')
-                stack.pop();
-            else
-                return "NO";
+        else{
+            return "NO";
         }
      }
         if(stack.isEmpty())
@@ -39,8 +25,8 @@ public class SymbolBalancing {
     return "NO";
     }
 public static void main(String[] args) {
-	//String s="{(][)}";
-	String s="{[()]}";
+	String s="{(][)}";
+	//String s="{[()]}";
 	System.out.println(isBalanced(s));
 }
 }
