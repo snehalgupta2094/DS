@@ -24,6 +24,7 @@ public class IsBinaryTreeHeap {
         TreeNode n2=new TreeNode(5);
         TreeNode n3=new TreeNode(4);
         TreeNode n4=new TreeNode(3);
+        //TreeNode n4=new TreeNode(9);
         TreeNode n5=new TreeNode(2);
         TreeNode n6=new TreeNode(1);
 
@@ -62,7 +63,9 @@ public class IsBinaryTreeHeap {
         }
         else
         {
-            return root.left!=null && root.right!=null && root.data>root.left.data && root.data>root.right.data;
+            boolean left=isMaxOrder(root.left);
+            boolean right=isMaxOrder(root.right);
+            return left && right && root.data>root.left.data && root.data>root.right.data;
         }
     }
     private boolean isCBT(TreeNode root, int index, int count) {
