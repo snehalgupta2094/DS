@@ -13,8 +13,6 @@ public class MinCostToConnectSticks {
         for(int i=0;i<a.length;i++){
             queue.offer(a[i]);
         }
-
-
         while (queue.size()>1){
             int i=queue.remove();
             int j=queue.remove();
