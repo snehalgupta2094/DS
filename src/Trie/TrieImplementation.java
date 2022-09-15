@@ -5,9 +5,6 @@ class TrieNode{
     boolean isTerminal;
     TrieNode(char ch){
         this.data=ch;
-        for(int i=0;i<26;i++){
-            children[i]=null;
-        }
         isTerminal=false;
     }
 }
@@ -73,7 +70,7 @@ public class TrieImplementation {
         t.insert("car");
         t.insert("cat");
         t.insert("ape");
-        System.out.println(t.search("cat"));
+        System.out.println(t.search("ape"));
     }
 
 }
