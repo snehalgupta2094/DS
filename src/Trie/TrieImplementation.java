@@ -21,7 +21,6 @@ class Trie{
             return;
         }
 
-
         //get index of word
         int index=word.charAt(0)-'a';
         TrieNode child;
