@@ -17,13 +17,14 @@ class TopologicalDFSImpl{
         adj.get(u).add(v);
     }
 
-    public void dfs(int v, boolean visited[], Stack<Integer> stack){
-        visited[v]=true;
-        for(int i: adj.get(v)){
-            if(!visited[i])
-                dfs(i,visited,stack);
+
+    public void dfs(int src, boolean visited[], Stack<Integer> stack){
+        visited[src]=true;
+        for(int neighbor: adj.get(src)){
+            if(!visited[neighbor])
+                dfs(neighbor,visited,stack);
         }
-        stack.push(v);
+        stack.push(src);
     }
 
     public boolean detectCycle(){
@@ -49,9 +50,9 @@ class TopologicalDFSImpl{
     }
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         int ans[]=new int[numCourses];
-        int j=0;
+
         boolean visited[]=new boolean[numCourses];
-        Stack<Integer> stack=new Stack<Integer>();
+
         //create adjacency list
         for(int i=0;i<numCourses;i++)
             addEdge(prerequisites[i][1],prerequisites[i][0]);
@@ -60,12 +61,13 @@ class TopologicalDFSImpl{
         if(detectCycle())
             return ans;
 
+        Stack<Integer> stack=new Stack<Integer>();
         //topologic sort with dfs and store result in stack
         for(int i=0;i<numCourses;i++) {
             if(!visited[i])
                 dfs(i,visited,stack);
         }
-
+        int j=0;
         while(!stack.isEmpty())
             ans[j++]=stack.pop();
         return ans;
