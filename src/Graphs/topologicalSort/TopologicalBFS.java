@@ -44,18 +44,18 @@ class TopologicalBFSImpl{
         }
 
         //bfs
-        int j=0;
+        int count=0;
         while(!queue.isEmpty()){
             int front=queue.poll();
-            ans[j++]=front;
+            ans[count++]=front;
             for(int neighbor: adj.get(front)){
                 indegree[neighbor]--;
                 if(indegree[neighbor]==0)
                     queue.add(neighbor);
             }
         }
-        //
-       if(j!=v)
+        //if count not equal to vertex then there is cycle
+       if(count!=v)
            return false;
        return true;
     }
