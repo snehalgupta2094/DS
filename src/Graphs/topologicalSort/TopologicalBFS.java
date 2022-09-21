@@ -21,35 +21,43 @@ class TopologicalBFSImpl{
     public void addEdge(int u, int v)
     {
         adj.get(u).add(v);
-        indegree[v]++;
     }
     public boolean kahns(int numCourses, int[][] prerequisites, int ans[]) {
-        int count = 0;
-        boolean visited[] = new boolean[numCourses];
-        Queue<Integer> queue = new LinkedList();
-        //create adjacency list
+
+      //create adjacency list
         for (int i = 0; i < prerequisites.length; i++)
             addEdge(prerequisites[i][1], prerequisites[i][0]);
 
-        for(int i=0;i<numCourses;i++)
-            if(indegree[i]==0)
-                queue.add(i);
-
-        while(!queue.isEmpty()){
-            int u=queue.poll();
-            for(int i:adj.get(u)){
-                indegree[i]--;
-                if(indegree[i]==0)
-                    queue.add(i);
+      //find indegree
+        int v=prerequisites.length;
+        for(int i=0;i<v;i++){
+            for(int neighbor: adj.get(i)){
+                indegree[neighbor]++;
             }
-            ans[count]=u;
-            count++;
         }
 
-        if(count!=v)
-            return false;
+      //find vertex with 0 indegree push to queue
+        Queue<Integer> queue=new LinkedList<>();
+        for(int i=0;i<v;i++){
+            if(indegree[i]==0)
+                queue.add(i);
+        }
 
-        return true;
+        //bfs
+        int j=0;
+        while(!queue.isEmpty()){
+            int front=queue.poll();
+            ans[j++]=front;
+            for(int neighbor: adj.get(front)){
+                indegree[neighbor]--;
+                if(indegree[neighbor]==0)
+                    queue.add(neighbor);
+            }
+        }
+        //
+       if(j!=v)
+           return false;
+       return true;
     }
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         int ans[]=new int[v];
