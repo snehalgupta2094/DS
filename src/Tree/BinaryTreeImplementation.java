@@ -85,8 +85,7 @@ public class BinaryTreeImplementation
 	public static void main(String[] args) 
 	{
 		BST t=new BST();
-
-		//Create a binary tree	
+		//Create a binary tree
 		//tree1
 		t.insert(7);
 		t.insert(3);
