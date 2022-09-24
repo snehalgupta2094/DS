@@ -54,17 +54,15 @@ public class Traversals {
 				stack.push(temp);
 				temp=temp.left;
 			}
-			else
-			{
-				if(stack.isEmpty())
-					done=true;
-				else
-				{
-					temp=stack.pop();	
-					result.add(temp.data);
-					temp=temp.right;
-				}
-			}	
+			else if(stack.isEmpty())
+				done=true;
+			else{
+				temp=stack.pop();
+				result.add(temp.data);
+				temp=temp.right;
+			}
+
+
 		}
 		printResult(result);
 	}
