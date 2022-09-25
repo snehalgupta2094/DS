@@ -1,7 +1,10 @@
 package Tree;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeMap;
 
 
@@ -19,38 +22,36 @@ public class TopViewOfBST {
 		}
 	}
 	TNode root;
-	class QEntry
-	{
-		int distance;
-		TNode node;
-		QEntry(TNode node, int distance)
-		{
-			this.distance=distance;
-			this.node=node;
+	class Pair<K,V>{
+		K first;
+		V second;
+		Pair(K first, V second){
+			this.first=first;
+			this.second=second;
 		}
 	}
-	
 	public void topView()
 	{
-		LinkedList<QEntry> queue=new LinkedList<QEntry>();
-		queue.add(new QEntry(root, 0));
-		
-		Map<Integer,QEntry> map=new TreeMap<Integer,QEntry>();
-		while(!queue.isEmpty())
-		{
-			QEntry tmp=queue.remove();
-			if(tmp.node!=null)
-			{
-				if(!map.containsKey(tmp.distance))
-					map.put(tmp.distance, tmp);
-				if(tmp.node.left!=null)
-					queue.add(new QEntry(tmp.node.left, tmp.distance-1));
-				if(tmp.node.right!=null)
-					queue.add(new QEntry(tmp.node.right,tmp.distance+1));
-			}
+		TreeMap<Integer,Integer> map=new TreeMap<>();
+		Queue<Pair<TNode,Integer>> queue=new ArrayDeque<>();
+		queue.offer(new Pair<>(root,0));
+
+		while (!queue.isEmpty()){
+			Pair<TNode,Integer> p=queue.poll();
+			TNode frontNode=p.first;
+			int hd=p.second;
+			map.putIfAbsent(hd,frontNode.data);
+
+			if(frontNode.left!=null)
+				queue.offer(new Pair<>(frontNode.left,hd-1));
+			if(frontNode.right!=null)
+				queue.offer(new Pair<>(frontNode.right,hd+1));
 		}
-		System.out.println("---Top view---");
-		map.forEach((k,v)->System.out.print(v.node.data+" "));
+		ArrayList<Integer> ans=new ArrayList<>();
+		for(int val:map.values()){
+			ans.add(val);
+		}
+		System.out.println(ans);
 	}
 	
 	public TNode create()
@@ -76,13 +77,11 @@ public class TopViewOfBST {
         n2.left  = n5;
         n2.right = n6;
          
-        n3.right = n7;
+        n3.left = n7;
+        n3.right = n8;
          
-        n4.left = n8;
-         
-        n5.right = n9;
-         
-        n6.right = n10;
+        n4.left = n9;
+        n4.right = n10;
 		
         return root;
 	}
