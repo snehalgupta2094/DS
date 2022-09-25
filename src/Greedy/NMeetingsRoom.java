@@ -1,7 +1,7 @@
 package Greedy;
 
 import java.util.*;
-
+//activity selection problem
 public class NMeetingsRoom {
 
     static class Pair<K,V>{
