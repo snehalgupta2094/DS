@@ -1,72 +1,50 @@
 package Tree;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TreeQuestions 
 {
+	public static void left(Node root, int level, List<Integer> ans){
+
+		if(root==null)
+			return;
+
+		if(level==ans.size()){
+			ans.add(root.data);
+		}
+		left(root.left,level+1,ans);
+		left(root.right,level+1,ans);
+
+	}
+
 	public static void leftView(Node root)
 	{
-		System.out.println("--Left view---");
-		Queue<Node> q=new LinkedList<Node>();
-		q.offer(root);
-		q.offer(null);		
-		
-		boolean levelChange=true;
-		while(!q.isEmpty())
-		{
-			Node tmp=q.poll();
-			if(levelChange)
-			{
-				System.out.print(tmp.data+" ");
-				levelChange=false;
-			}
-			if(tmp!=null)
-			{
-			if(tmp.left!=null)
-				q.offer(tmp.left);
-			if(tmp.right!=null)
-				q.offer(tmp.right);
-			}
-			else
-			{
-			   if(!q.isEmpty())
-				   q.offer(null);
-			   levelChange=true;
-			}
-		}
+		System.out.println("--left view--");
+		ArrayList<Integer> ans =new ArrayList<>();
+		left(root,0,ans);
+		System.out.println(ans);
 	}
-	
+	public static void right(Node root, int level, List<Integer> ans){
+
+		if(root==null)
+			return;
+
+		if(level==ans.size()){
+			ans.add(root.data);
+		}
+		right(root.right,level+1,ans);
+		right(root.left,level+1,ans);
+	}
+
 	public static void rightView(Node root)
 	{
-		System.out.println();
-		System.out.println("--Right view---");
-		Queue<Node> q=new LinkedList<Node>();
-		q.offer(root);
-		q.offer(null);		
-		
-		while(!q.isEmpty())
-		{
-			Node tmp=q.poll();
-			if(q.peek()==null && tmp!=null)
-			{
-				System.out.print(tmp.data+" ");
-			}
-			
-			if(tmp!=null)
-			{
-			if(tmp.left!=null)
-				q.offer(tmp.left);
-				
-			if(tmp.right!=null)
-				q.offer(tmp.right);
-			
-			}
-			else
-			{
-			   if(!q.isEmpty())
-				   q.offer(null);
-			}
-		}	
+		System.out.println("--Right view--");
+		ArrayList<Integer> ans =new ArrayList<>();
+		right(root,0,ans);
+		System.out.println(ans);
 	}
 }
