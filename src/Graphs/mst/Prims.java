@@ -1,58 +1,89 @@
 package Graphs.mst;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 class PrimsImpl{
-    int v;
-    int [][] graph;
-
-}
-public class Prims {
-    public static int selectMinVertex(int v,int value[], boolean setMST[]){
-        int min=Integer.MAX_VALUE;
-        int vertex=0;
-        for(int i=0;i<v;i++){
-            if(!setMST[i] && value[i]<min)
-            {
-                vertex=i;
-                min=value[i];
-            }
+    class Pair<K,V>{
+        K first;
+        V second;
+        Pair(K first, V second){
+            this.first=first;
+            this.second=second;
         }
-        return vertex;
     }
-    public static void findMST(int v,int graph[][]){
-        int parent[]=new int[v]; //Stores MST
-        boolean setMST[]=new boolean[v]; //checks if vertex is included in MST
-        int value[]=new int[v]; //stores weight, used for edge relaxation
+    HashMap<Integer,ArrayList<Pair<Integer,Integer>>> adj=new HashMap<>();
+    PrimsImpl(int v){
+      this.v=v;
+    }
+    public void addEdge(int u, int v, int w){
+        adj.putIfAbsent(u,new ArrayList<>());
+        adj.get(u).add(new Pair<>(v,w));
+    }
+    int v;
+    public void prims(int src){
+        int[] key=new int[v];
+        boolean[] mst=new boolean[v];
+        int parent[]=new int[v];
 
-        parent[0]=-1;
-        value[0]=0;
-
-        for(int i=1;i<v;i++)
-        {
-            value[i]=Integer.MAX_VALUE;
+       //Assign default
+        for(int i=0;i<v;i++){
+            key[i]=Integer.MAX_VALUE;
+            parent[i]=-1;
         }
-        for(int i=0;i<v-1;i++){
-            //select best vertex by applying greedy method
-            int u=selectMinVertex(v,value, setMST);
-            setMST[u]=true; //include new vertex in MST
-            for(int j=0;j<v;j++){
-                /* 3 constraints
-                 1. edge is present from u to j
-                 2. vertex j is not included in mst
-                 3. edge weight is less than current edge weight
-                 */
-                if(graph[u][j]!=0 && !setMST[j] && graph[u][j]<value[j])
-                {
-                    value[j]=graph[u][j];
-                    parent[j]=u;
+        key[src]=0;
+        mst[src]=true;
+        for(int i=0;i<v;i++){
+            //find min value
+            int vertex=selectMinVertex(mst,key);
+            //mark true for min node
+            mst[vertex]=true;
+            //find all adjacent nodes
+            for(Pair<Integer,Integer> neighbor: adj.get(vertex)){
+                if(!mst[neighbor.first] && key[vertex]!=Integer.MAX_VALUE && neighbor.second<key[neighbor.first]){
+                    key[neighbor.first]=neighbor.second;
+                    parent[neighbor.first]=vertex;
                 }
             }
         }
-        for(int i=1;i<v;i++)
-        {
-            System.out.println(parent[i]+"->"+i+" weight="+graph[parent[i]][i]);
+        //Process ans
+        int sum=0;
+        for(int i=0;i<v;i++){
+            sum=sum+key[i];
         }
+        System.out.println("MST: "+sum);
     }
+
+    private int selectMinVertex(boolean[] mst, int[] key) {
+        int min=Integer.MAX_VALUE;
+        int vertex=0;
+        for(int i=0;i<v;i++){
+            if(!mst[i] && key[i]<min){
+                min=key[i];
+                vertex=i;
+            }
+        }
+       return vertex;
+    }
+
+}
+
+public class Prims {
+
     public static void main(String[] args) {
-        int graph[][]={{0,4,6,0,0,0},{4,0,6,3,4,0},{6,6,0,1,8,9},{0,3,1,0,2,3},{0,4,8,2,0,7},{0,0,0,3,7,0}};
-        findMST(6,graph);
+        PrimsImpl g=new PrimsImpl(5);
+        g.addEdge(0,1,2);
+        g.addEdge(0,3,6);
+        g.addEdge(1,0,2);
+        g.addEdge(1,3,8);
+        g.addEdge(1,4,5);
+        g.addEdge(1,2,3);
+        g.addEdge(2,1,3);
+        g.addEdge(2,4,7);
+        g.addEdge(3,0,6);
+        g.addEdge(3,1,8);
+        g.addEdge(4,1,5);
+        g.addEdge(4,2,7);
+        g.prims(0);
     }
 }
