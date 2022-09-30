@@ -17,29 +17,39 @@ class DijkstraPQImpl{
         adj.get(u).add(new int[]{v,w});
     }
     public int[] dijkstraPQ(int src){
-
+       //
         PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->a[0]-b[0]); //a[0]->distance, a[1]->destination
         boolean []visited=new boolean[v];
         int[] distance=new int[v];
+
+        //distance array with infinite value
         for(int i=0;i<v;i++){
            distance[i]=Integer.MAX_VALUE;
         }
+        //update distance for source and push into priority queue
         distance[src]=0;
         pq.offer(new int[]{0,src});
 
         while(!pq.isEmpty()){
+
+            //fetch top record
          int[] source=pq.poll();
          int dist=source[0];
          int topNode=source[1];
 
+         //if already visited ignore entry
          if(visited[topNode])
              continue;
 
          visited[topNode]=true;
+
+         //traverse on neighbors
          for(int[] neighbor: adj.get(topNode)){
              if(!visited[neighbor[0]]){
                  if(distance[topNode]!=Integer.MAX_VALUE){
+                     //distance update
                      distance[neighbor[0]]=Math.min(dist+neighbor[1],distance[neighbor[0]]);
+                     //insert in queue
                      pq.offer(new int[]{distance[neighbor[0]],neighbor[0]});
                  }
              }
