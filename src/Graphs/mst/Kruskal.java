@@ -26,8 +26,8 @@ class KruskalImpl{
         }
     }
     public void unionSet(int u, int v,int rank[],int parent[]){
-        u=findParent(parent,u);
-        v=findParent(parent,v);
+     //   u=findParent(parent,u);
+      //  v=findParent(parent,v);
         if(rank[u]<rank[v])
             parent[u]=v;
         else if(rank[u]>rank[v])
