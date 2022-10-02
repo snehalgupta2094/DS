@@ -11,9 +11,11 @@ class DijkstraPQImpl{
     HashMap<Integer, List<int[]>> adj=new HashMap<>(); //source, list of (neighbour,distance )
     DijkstraPQImpl(int v){
         this.v=v;
+        for(int i=0;i<v;i++)
+            adj.putIfAbsent(i,new ArrayList<>());
     }
     public void addEdge(int u, int v, int w){
-        adj.putIfAbsent(u,new ArrayList<>());
+     //   adj.putIfAbsent(u,new ArrayList<>());
         adj.get(u).add(new int[]{v,w});
     }
     public int[] dijkstraPQ(int src){
@@ -61,7 +63,7 @@ class DijkstraPQImpl{
 public class DijkstraWithPrioirtyQueue {
 
     public static void main(String[] args) {
-        DijkstraPQImpl g=new DijkstraPQImpl(5);
+/*        DijkstraPQImpl g=new DijkstraPQImpl(5);
         g.addEdge(0,1,7);
         g.addEdge(0,2,1);
         g.addEdge(0,3,2);
@@ -75,10 +77,15 @@ public class DijkstraWithPrioirtyQueue {
         g.addEdge(3,1,5);
         g.addEdge(3,4,7);
         g.addEdge(4,1,1);
-        g.addEdge(4,3,7);
+        g.addEdge(4,3,7);*/
+        DijkstraPQImpl g=new DijkstraPQImpl(3);
+        g.addEdge(0,1,5);
+        g.addEdge(0,2,6);
+        g.addEdge(2,1,-3);
+
        int[] distance=g.dijkstraPQ(0);
 
-       for(int i=0;i<5;i++){
+       for(int i=0;i<3;i++){
            System.out.println("0->"+i+":"+distance[i]);
        }
     }
