@@ -43,7 +43,7 @@ class ArticulationPointImpl{
                 continue;
             if (!visited[neighbor]) {
                 child++;
-                dfs(neighbor,parent,low,disc,visited,ap);
+                dfs(neighbor,node,low,disc,visited,ap);
                 low[node]=Math.min(low[node],low[neighbor]);
                 if(low[neighbor]>=disc[node] && parent!=-1)
                 {
@@ -53,10 +53,10 @@ class ArticulationPointImpl{
                 //back edge
                 low[node]=Math.min(low[node],disc[neighbor]);
             }
-            if(parent==-1 && child>1){
-                ap[node]=true;
-            }
 
+        }
+        if(parent==-1 && child>1){
+            ap[node]=true;
         }
     }
 }
