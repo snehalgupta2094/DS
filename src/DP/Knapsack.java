@@ -68,6 +68,32 @@ public static int knapsack(int[] value, int[] weight, int capacity, int index){
         }
     return dp[n-1][capacity];
     }
+    //space optimization
+    public static int knapsack3(int[] value, int[] weight, int capacity, int n){
+        int prev[]=new int[capacity+1];
+        int curr[]=new int[capacity+1];
+        //base case
+        for(int w=weight[0];w<=capacity;w++){
+            if(prev[w]<=capacity)
+                prev[w]=value[0];
+            else
+                prev[w]=0;
+        }
+        //include
+        for(int i=1;i<n;i++)
+        {
+            for(int w=0;w<=capacity;w++){
+                int include=0;
+                if(weight[i]<=w){
+                    include=value[i]+prev[w-weight[i]];
+                }
+                int exclude=prev[w];
+                curr[w]=Math.max(include,exclude);
+            }
+            prev=curr;
+        }
+        return prev[capacity];
+    }
     public static void main(String[] args) {
         int[] value={5,4,8,6};
         int[] weight={1,2,4,5};
@@ -80,5 +106,6 @@ public static int knapsack(int[] value, int[] weight, int capacity, int index){
         System.out.println(knapsack(value,weight,capacity,n-1));
         System.out.println(knapsack1(value,weight,capacity,n-1,dp));
         System.out.println(knapsack2(value,weight,capacity,n));
+        System.out.println(knapsack3(value,weight,capacity,n));
     }
 }
