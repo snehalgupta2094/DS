@@ -65,9 +65,8 @@ public static int knapsack(int[] value, int[] weight, int capacity, int index){
                 int exclude=dp[i-1][w];
                 dp[i][w]=Math.max(include,exclude);
             }
-
         }
-return dp[n-1][capacity];
+    return dp[n-1][capacity];
     }
     public static void main(String[] args) {
         int[] value={5,4,8,6};
