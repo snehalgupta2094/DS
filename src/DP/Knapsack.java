@@ -115,7 +115,6 @@ public static int knapsack(int[] value, int[] weight, int capacity, int index){
                 int exclude=curr[w];
                 curr[w]=Math.max(include,exclude);
             }
-
         }
         return curr[capacity];
     }
