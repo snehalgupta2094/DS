@@ -1,5 +1,6 @@
 package DP;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Queue;
 
@@ -68,13 +69,31 @@ public class MicCostTickets {
     return dp[0];
     }
     //space optimization
-    public static int solve4(int[]days, int costs[], int index, int n){
-
-        return 0;
-    }
     static class Pair<K,V>{
-        K first;
-        V second;
+        K first; //day
+        V second; //cost till day
+        Pair(K first,V second){
+            this.first=first;
+            this.second=second;
+        }
+    }
+    public static int solve4(int[]days, int costs[]){
+       Queue<Pair<Integer,Integer>> weekly=new ArrayDeque<>();
+       Queue<Pair<Integer,Integer>> monthly=new ArrayDeque<>();
+       int ans=0;
+       for(int day: days){
+           //step1: remove expired days from queue
+           while (!weekly.isEmpty() && weekly.peek().first+7<=day)
+               weekly.poll();
+           while (!monthly.isEmpty() && monthly.peek().first+30<=day)
+               monthly.poll();
+           //Step2: Push correct days cost
+           weekly.offer(new Pair<>(day,ans+costs[1]));
+           monthly.offer(new Pair<>(day,ans+costs[2]));
+           ans=Math.min(ans+costs[0],Math.min(weekly.peek().second,monthly.peek().second));
+       }
+
+        return ans;
     }
     public static void main(String[] args) {
          int days[]={1,4,6,7,8,20};
@@ -85,5 +104,6 @@ public class MicCostTickets {
         Arrays.fill(dp, -1);
         System.out.println(solve2(days,costs,0,n,dp));
         System.out.println(solve3(days,costs,n));
+        System.out.println(solve4(days,costs));
     }
 }
