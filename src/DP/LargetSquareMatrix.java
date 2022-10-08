@@ -62,10 +62,32 @@ static int ans=0;
      }
         return dp[0][0];
     }
+    //Space optimization
+    public static int solve3(int matrix[][], int maximum){
+        int row=matrix.length;
+        int col=matrix[0].length;
+        int curr[]=new int[row+1];
+        int next[]=new int[row+1];
+        for(int i=row-1;i>=0;i--){
+            for(int j=col-1;j>=0;j--){
+                if(matrix[i][j]==1){
+                    curr[j]=Math.min(next[j],Math.min(next[j+1],curr[j+1]))+1;
+                    maximum = Math.max(maximum, curr[j]);
+
+                }
+                else
+                {
+                    curr[j]=0;
+                }
+            }
+            next=curr;
+        }
+        return next[0];
+    }
     public static void main(String[] args) {
-       int matrix[][]={{1,1,1,1},
-                       {1,1,1,1},
-                       {1,1,1,1},
+       int matrix[][]={{1,1,1,0},
+                       {1,1,1,0},
+                       {0,1,1,1},
                        {1,1,1,1}};
         System.out.println(solve(matrix,0,0));
         int dp[][]=new int[4][4];
@@ -77,6 +99,8 @@ static int ans=0;
         max=solve1(matrix,0,0,dp,max);
         System.out.println(max);
         max=solve2(matrix,0);
+        System.out.println(max);
+        max=solve3(matrix,0);
         System.out.println(max);
     }
 }
