@@ -45,6 +45,29 @@ public class BuyAndSellStock2 {
         }
        return dp[i][buy]=profit;
     }
+    //Tabulation
+    public static int solve2(int prices[]){
+        int dp[][]=new int[prices.length+1][2];
+
+        for(int i=prices.length-1;i>=0;i--){
+            for(int buy=0;buy<=1;buy++){
+                int profit=0;
+                if(buy==1){
+                    int buyKaro=-prices[i]+ dp[i+1][0];
+                    int skipKaro=0+dp[i+1][1];
+                    profit=Math.max(buyKaro,skipKaro);
+                }
+                else
+                {
+                    int sellKaro=prices[i]+ dp[i+1][1];
+                    int skipKaro=0+dp[i+1][0];
+                    profit=Math.max(sellKaro,skipKaro);
+                }
+                dp[i][buy]=profit;
+            }
+        }
+        return dp[0][1];
+    }
     public static void main(String[] args) {
         int[] prices={7,1,5,3,6,4};
         System.out.println(solve(prices,0,1));
@@ -55,5 +78,6 @@ public class BuyAndSellStock2 {
             dp[i][1]=-1;
         }
         System.out.println(solve1(prices,0,1,dp));
+        System.out.println(solve2(prices));
     }
 }
