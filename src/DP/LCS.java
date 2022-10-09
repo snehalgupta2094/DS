@@ -27,6 +27,36 @@ public class LCS
 			ans= Math.max(solve1(a,b,i+1,j,dp),solve1(a,b,i,j+1,dp));
 		return dp[i][j]=ans;
 	}
+	//Tabulation
+	public static int solve2(String a, String b){
+		int dp[][]=new int[a.length()+1][b.length()+1];
+		for(int i=a.length()-1;i>=0;i--)
+			for(int j=b.length()-1;j>=0;j--) {
+				if (a.charAt(i) == b.charAt(j))
+					dp[i][j] = 1+dp[i+1][j+1];
+				else
+					dp[i][j] = Math.max(dp[i+1][j], dp[i][j+1]);
+			}
+		return dp[0][0];
+	}
+	//Space optimization
+	public static int solve3(String a, String b){
+		int next[]=new int[b.length()+1];
+		int curr[]=new int[b.length()+1];
+		for(int i=a.length()-1;i>=0;i--){
+			int ans=0;
+			for(int j=b.length()-1;j>=0;j--) {
+				if (a.charAt(i) == b.charAt(j))
+					ans = 1+next[j+1];
+				else
+					ans = Math.max(next[j], curr[j+1]);
+				curr[j]=ans;
+			}
+			next=curr;
+		}
+
+		return next[0];
+	}
 	public static void dpsol(String s1, String s2)
 	{
 		char b[]=s1.toCharArray();
@@ -78,6 +108,8 @@ public class LCS
 			for(int j=0;j<s2.length();j++)
 				dp[i][j]=-1;
 		System.out.println(solve1(s1,s2,0,0,dp));
+		System.out.println(solve2(s1,s2));
+		System.out.println(solve3(s1,s2));
 	}
 	
 	
