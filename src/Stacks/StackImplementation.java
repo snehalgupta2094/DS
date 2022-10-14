@@ -4,34 +4,41 @@ import java.util.Arrays;
 
 class Stacking{
 	int top=-1;
-	int capacity=10;
-	int s[]=new int[capacity];
-	public void push(int data) throws Exception
-	{
-		if(top+1==capacity)
-			throw new Exception("Stack overflow");
-		s[++top]=data;
+        int capacity;
+	int stack[];
+	Stacking(int capacity){
+		this.capacity=capacity;
+		this.stack=new int[capacity];
 	}
-	public int pop() throws Exception
-	{
+	public void push(int element) throws Exception  {
+		top++;
+		if(top==capacity)
+			throw new Exception("full");
+		stack[top]=element;
+	}
+        public int pop() throws Exception{
 		if(top==-1)
-			throw new Exception("Stack is empty");
-		return s[top--];
+			throw new Exception("empty");
+		return stack[top--];
 	}
-	public void printStack()
-	{
-		System.out.println("--printing stack");
-		Arrays.stream(s).forEach(System.out::println);
+	public void printStack() {
+		System.out.println();
+		for (int i = 0; i <=top; i++) {
+			System.out.print(stack[i]+" ");
+		}
 	}
 }
 public class StackImplementation {
 public static void main(String[] args) throws Exception {
-	Stacking st=new Stacking();
+	Stacking st=new Stacking(10);
 	st.push(1);
 	st.push(2);
 	st.push(3);
+	st.push(4);
 	st.printStack();
 	st.pop();
+	st.pop();
+	st.printStack();
 	st.push(6);
 	st.printStack();
 }
