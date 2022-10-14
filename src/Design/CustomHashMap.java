@@ -17,7 +17,7 @@ class MyHashMap {
     }
 
     public void put(int key, int value) {
-        int hash=hashCode(key);
+        int hash=hash(key);
         Entry current=map[hash];
         Entry newNode=new Entry(key,value,null);
         if(current==null){
@@ -40,7 +40,7 @@ class MyHashMap {
     }
 
     public int get(int key) {
-        int hash=hashCode(key);
+        int hash=hash(key);
         Entry current=map[hash];
         while (current!=null){
             //value already exist
@@ -53,10 +53,28 @@ class MyHashMap {
     }
 
     public void remove(int key) {
-
+        int hash=hash(key);
+        Entry current=map[hash];
+        Entry prev=null;
+        while (current!=null){
+            //value already exist overwrite it
+            if(current.key.equals(key)){
+               if(prev==null){
+                   current=current.next;
+                    map[hash]=current;
+                return;
+                }
+               else{
+                prev.next=current.next;
+                    return;
+               }
+        }
+            prev=current;
+            current=current.next;
     }
-    public int hashCode(int key){
-        return hashCode(key)%capacity;
+    }
+    public int hash(int key){
+        return Math.abs(Integer.hashCode(key))%capacity;
     }
 
 }
@@ -70,4 +88,12 @@ class MyHashMap {
  */
 public class CustomHashMap {
 
+    public static void main(String[] args) {
+          MyHashMap obj = new MyHashMap();
+          obj.put(1,7);
+          int param_2 = obj.get(1);
+          System.out.println(param_2);
+          obj.remove(1);
+          System.out.println(obj.get(1));
+    }
 }
