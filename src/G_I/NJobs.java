@@ -77,9 +77,9 @@ public class NJobs {
         JobDetails C=new JobDetails("C");
         JobDetails D=new JobDetails("D");
        A.dependent=B;
-      // B.dependent=C;
+       B.dependent=C;
        C.dependent=D;
-      // D.dependent=A;
+       D.dependent=A;
        Job[] jobs={A,B,C,D};
        JobSchedule s=new JobSchedule();
        s.scheduleJobs(jobs);
