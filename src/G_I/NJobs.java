@@ -45,6 +45,7 @@ class JobSchedule{
               dfs(job,visitedJobs,parentJobs);
           }
         }
+       // System.out.println(parentJobs.size());
         while (!parentJobs.isEmpty())
         {
             Job parentJob=parentJobs.pop();
@@ -56,6 +57,8 @@ class JobSchedule{
         }
     }
     public void dfs(Job job,Set<Job> visitedJobs,List<Job> parentJobs){
+        if(visitedJobs.contains(job))
+            return;
         Job dependentJob=job.getDependency();
         if(dependentJob!=null){
             dfs(dependentJob,visitedJobs,parentJobs);
@@ -79,7 +82,7 @@ public class NJobs {
        A.dependent=B;
        B.dependent=C;
        C.dependent=D;
-       D.dependent=A;
+     //  D.dependent=A;
        Job[] jobs={A,B,C,D};
        JobSchedule s=new JobSchedule();
        s.scheduleJobs(jobs);
