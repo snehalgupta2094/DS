@@ -1,6 +1,10 @@
+/*Non Zero Signals with distance D
+        A = [0 ,5, 0, 0 , 2, 0 ,5 ]
+        B = [5, 0, 0, 0, 0, 0, 2 ]
+        return validSignal at distance D given the signals are equal:
+        for D= 2 ,output is 5,2
+        for D= 1, OUTPUT  is 5*/
 package G_I;
-
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
