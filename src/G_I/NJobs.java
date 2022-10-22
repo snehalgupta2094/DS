@@ -11,6 +11,7 @@ import java.util.Stack;
 interface Job{
     void run();
     Job getDependency();
+    String getName();
 
 }
 
@@ -32,6 +33,11 @@ class JobDetails implements Job{
     @Override
     public Job getDependency() {
         return this.dependent;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }
 class JobSchedule{
