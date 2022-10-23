@@ -30,7 +30,6 @@ class JobScheduler{
 
      }
     }
-    static int count=0;
     public boolean dfs(Job job, Set<Job> visited){
         visited.add(job);
         Job dependentJob=job.getDependency();
