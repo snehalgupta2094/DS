@@ -11,17 +11,15 @@ import java.util.HashSet;
 public class SlidingWindow {
 
     public static void main(String[] args) {
-        //   int a[]={0 ,5, 0, 7 ,2, 0 ,5};
-        //  int b[]={5, 7, 0, 0, 0, 0, 2 };
-        //    int a[]={0 ,5, 0, 0 ,2, 0 ,5};
-        //  int b[]={5, 0, 0, 0, 0, 0, 2 };
-        int a[]={1 ,5, 0, 0 ,2, 0 ,5};
-        int b[]={0, 5, 0, 1, 0, 0, 2 };
-
-        int k=3;
-        //int k=1;
+        //  int a[]={0 ,5, 0, 7 ,2, 0 ,5};
+          //int b[]={5, 7, 0, 0, 0, 0, 2 };
+         int a[]={0 ,5, 0, 0 ,2, 0 ,5};
+          int b[]={5, 0, 0, 0, 0, 0, 2 };
+      //int a[]={1 ,5, 0, 0 ,2, 0 ,5};
+      //int b[]={0, 5, 0, 1, 0, 0, 2 };
+        int k=2;
+//Approach1:
         ArrayList<Integer> result=new ArrayList<>();
-
         for(int i=0;i<a.length;i++){
             if(a[i]!=0){
                 System.out.println(a[i]);
@@ -38,33 +36,31 @@ public class SlidingWindow {
                 }
             }
         }
-        // System.out.println(result);
 
+//Approach2:
         HashSet<Integer> set = new HashSet<>();
-        ArrayList<Integer> op=new ArrayList<>();
+        ArrayList<Integer> output=new ArrayList<>();
+        //Traversing left to right and saving all previous element in set so that we dont have to revisit them again
         for (int i=0; i<a.length; i++)
         {
-            set.add(b[i]);
-
             if (a[i]!=0 && set.contains(a[i]))
-                op.add(a[i]);
-            if (i-k >= 0)
-                set.remove(b[i-k]);
+                output.add(a[i]);
+            if (i-k>=0) {
+                set.remove(b[i - k]);
+            }
+            set.add(b[i]);
         }
-
+        //Traversing right to left and saving all previous element in set so that we dont have to revisit them again
         set = new HashSet<>();
         for (int i=a.length-1; i>=0; i--)
         {
-            set.add(b[i]);
-
-            if (a[i]!=0 && set.contains(a[i])){
-                op.add(a[i]);
-            }
-
-            if (i+k < a.length)
+            if (a[i]!=0 && set.contains(a[i]))
+                output.add(a[i]);
+            if (i+k<a.length)
                 set.remove(b[i+k]);
+            set.add(b[i]);
         }
-
-        System.out.println(op);
+        System.out.println(output);
     }
 }
+//TC: O(n), SC: O(n)
