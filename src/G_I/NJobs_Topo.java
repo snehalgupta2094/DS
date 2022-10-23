@@ -7,8 +7,8 @@ import java.util.Set;
 
 class JobScheduler{
     public void scheduleJobs(Job[] jobs){
-     Set<Job> visited=new HashSet<>();
-     Queue<Job> parents=new LinkedList<>();
+     Set<Job> visited=new HashSet<>();  //O(E)
+     Queue<Job> parents=new LinkedList<>(); //O(E/2)
      boolean isCycle=false;
      for(Job job: jobs){
          if(!visited.contains(job)){
@@ -30,6 +30,7 @@ class JobScheduler{
 
      }
     }
+    static int count=0;
     public boolean dfs(Job job, Set<Job> visited){
         visited.add(job);
         Job dependentJob=job.getDependency();
@@ -54,7 +55,7 @@ public class NJobs_Topo {
         JobDetails C=new JobDetails("C");
         JobDetails D=new JobDetails("D");
        A.dependent=B;
-   //    B.dependent=C;
+       B.dependent=C;
        C.dependent=D;
        //D.dependent=A;
        Job[] jobs={A,B,C,D};
@@ -63,3 +64,4 @@ public class NJobs_Topo {
 
     }
 }
+//TC: O(V+E), SC: O(E)
