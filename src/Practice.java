@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,14 +21,22 @@ class Deployment{
     int id;
 
 }
+class History{
+    Number ended;
+}
 public class Practice {
 
-    public static boolean isFeatureFlag(int i, int j) {
-        return true;
-    }
 
     public static void main(String[] args) {
-        PriorityQueue<int[]> pq=new PriorityQueue<>((a, b)->Integer.compare(a[0], b[0]));
+
+/*        String uri="/api/vcenter/lcm/555e2e4a-fa18-4c17-9414-49d4e3daa50d/deployments/f874dc29-4dd5-49cc-8b92-52a13b0f1f2a/status";
+        String blockedURI="/api/vcenter/lcm/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/deployments/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/status";
+        if (uri.matches(blockedURI)) {
+            System.out.println("matched");
+        } else {
+            System.out.println("nope");
+        }*/
+     /*   PriorityQueue<int[]> pq=new PriorityQueue<>((a, b)->Integer.compare(a[0], b[0]));
         pq.add(new int[]{13,1});
         pq.add(new int[]{11,4});
         pq.add(new int[]{4,9});
@@ -36,7 +45,7 @@ public class Practice {
 
         while (!pq.isEmpty()){
             System.out.println(Arrays.toString(pq.poll()));
-        }
+        }*/
 
 //        System.out.println(Objects.nonNull(deployment.getId()));
 

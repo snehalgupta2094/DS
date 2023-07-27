@@ -21,27 +21,66 @@ Phone round
         So we need 5 days.
         Approach1:
         */
+
+//case1:target: odd
+//odd turn: 21212..
+//even turn: 21202..
+//===================
+//case2:target: even
+//odd turn: 21202...
+//even turn: 21212..
+//===================
+//1: 1,2,1
+//2: 2
+//2: 2
+
+//  1->2,1,2,1,2==(5)
+// -4->1,2,1,2,1,2,1,2,1 (9)
+//  1->2,1,2,1,2== (5)
+//  7->2== (3)
+//  2->2,1,2,1,0,1== (6)
+//==26
+
+//  1->1,2,1,2,1,0,1 (7)
+// -4->2,1,2,1,2,1,2,1,0,1 (10)
+//  1->1,2,1,2,1,0,1 (7)
+//  7->2 (1)
+//  2->1,2,1,2,1 (5)
+
+//6: 2,0,2
+//6: 1,2,1
+
+
 public class Solution_26Oct {
-static int count=0;
-    public static int calculate(int a[], int index){
-        if(index==a.length-1)
-            return count;
-        if(a[index]!=0)
-            count=count+(a[index]%2)+(a[index]/2);
-        return calculate(a,index+1);
+    public static int calculate(int a[], int target){
+        int one=0;
+        int two=0;
+       for(int i=0;i<a.length;i++){
+           one+=(target-a[i])%2;
+           two+=Math.floor((target-a[i])/2);
+       }
+        System.out.println("1:"+one);
+        System.out.println("2:"+two);
+       int res=2*Math.min(one, two);
+       if(one>two){
+           res+=1+2*(one-two-1);
+       }
+       else if(two>one){
+           two-=one;
+           res+=4*Math.floor(two/3)+two%3+1;
+       }
+       return res;
     }
     public static void main(String[] args) {
-        int a[]={1,-4,1,2,7,9};
-      //  int a[]={10,8};
+        //  int a[]={6,10}; //4->{2,0}
+        // int a[]={1,-4,1,2,7,9};
+         int a[]={1,1,2,4};
+         //  int a[]={10,8};
         int target=Integer.MIN_VALUE;
        for(int i=0;i<a.length;i++){
            if(a[i]>target)
                target=a[i];
        }
-        System.out.println(target);
-        for(int i=0;i<a.length;i++){
-            a[i]=target-a[i];
-        }
-        System.out.println(calculate(a,0));
+        System.out.println(Math.min(calculate(a,target),calculate(a,target+1)));
     }
 }
