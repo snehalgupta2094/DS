@@ -25,6 +25,7 @@ public class ReverseStack {
 
 		int element = s.pop();
 		reverse(s);
+		System.out.println(element);
 		insertAtBottom(s, element);
 	}
 

@@ -42,7 +42,7 @@ class TopologicalDFSImpl{
         for(int v:adj.get(u)){
             if(visited[v]==1)
                 return true;
-            if(visited[u]==0 && detectCycleUtil(v,visited))
+            if(visited[v]==0 && detectCycleUtil(v,visited))
                 return true;
         }
         visited[u]=2;
