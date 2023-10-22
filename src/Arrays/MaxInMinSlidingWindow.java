@@ -20,7 +20,8 @@ public class MaxInMinSlidingWindow {
                 queue.removeFirst();
             }
             queue.addLast(i);
-            if(i>=k-1){   //current index>=window size-1
+            if(i>=k-1){
+                System.out.println(i);
                 output[j++]=a[queue.getFirst()];
                 max=Math.max(max,a[queue.getFirst()]);
             }
@@ -33,7 +34,7 @@ public class MaxInMinSlidingWindow {
     //qfirst=1
     public static void main(String[] args) {
         int a[]={8,2,4,6, 11, 9, 7, 4, 2};
-        int k=3;
+        int k=4;
         int max=findMax(a,k);
         System.out.println(max);
     }
