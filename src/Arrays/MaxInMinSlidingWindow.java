@@ -16,10 +16,10 @@ public class MaxInMinSlidingWindow {
             if(!queue.isEmpty() && a[queue.getLast()]>=a[i]){
                 queue.removeLast();
             }
-            if(!queue.isEmpty() && queue.getFirst()<=i-k){ //first element in queue<=current window size
+            if(!queue.isEmpty() && i-queue.getFirst()>=k){
                 queue.removeFirst();
             }
-            queue.add(i);
+            queue.addLast(i);
             if(i>=k-1){   //current index>=window size-1
                 output[j++]=a[queue.getFirst()];
                 max=Math.max(max,a[queue.getFirst()]);
