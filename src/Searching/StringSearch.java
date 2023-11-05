@@ -9,7 +9,7 @@ import java.util.Set;
 public class StringSearch {
 
     public static void main(String[] args) {
-        String input="EJOABCOIEFIUASKJMDJCBBCACUDH";
+        String input="EJOABCOIEFIUASKJCACDJCBBCACUDH";
         String output="";
         ArrayList<String> allSuccessfullEventsList=new ArrayList<>();
         for(int i=input.length()-1;i>=0;i--){
