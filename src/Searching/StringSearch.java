@@ -3,7 +3,8 @@ package Searching;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
+
+//Given string of events find the longest event which contains substring of A,B,C and event always ends in C
 
 public class StringSearch {
 
