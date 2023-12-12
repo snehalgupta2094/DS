@@ -1,11 +1,8 @@
 package Strings;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeSet;
 
 /*
@@ -38,19 +35,18 @@ public class PermutationsInSentence {
         List<String> output=new ArrayList<>();
         //Create sorted map
         HashMap<String, TreeSet<String>> synonymMap=new HashMap<>();
-        for(int i=0;i<synonyms.length;i++){
-            TreeSet<String> replacement=new TreeSet<>();
-            if(synonymMap.get(synonyms[i][0])!=null){
-                replacement=synonymMap.get(synonyms[i][0]);
-                   replacement.add(synonyms[i][1]);
-                   synonymMap.put(synonyms[i][0],replacement);
-                }
-                else{
-                    replacement.add(synonyms[i][0]);
-                }
-            replacement.add(synonyms[i][1]);
-            synonymMap.put(synonyms[i][0],replacement);
+        for (String[] synonym : synonyms) {
+            TreeSet<String> replacement = new TreeSet<>();
+            if (synonymMap.get(synonym[0]) != null) {
+                replacement = synonymMap.get(synonym[0]);
+                replacement.add(synonym[1]);
+                synonymMap.put(synonym[0], replacement);
+            } else {
+                replacement.add(synonym[0]);
             }
+            replacement.add(synonym[1]);
+            synonymMap.put(synonym[0], replacement);
+        }
         //get All combinations
         String[] words=input_sentence.split(" ");
         getCombination(words,synonymMap,0,new StringBuffer(),output);
@@ -68,12 +64,12 @@ public class PermutationsInSentence {
           TreeSet<String> replacements=synonymMap.get(words[index]);
                for(String replacement: replacements){
                    StringBuffer copySentence=new StringBuffer(sentence);
-                   copySentence.append(replacement+" ");
+                   copySentence.append(replacement).append(" ");
                    getCombination(words,synonymMap,index+1,copySentence,solution);
                }
            }
         else{
-            sentence.append(words[index]+" ");
+            sentence.append(words[index]).append(" ");
             getCombination(words,synonymMap,index+1,sentence,solution);
         }
     }
