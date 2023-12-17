@@ -14,6 +14,7 @@ output={"B<u>i</u>rd","Ca<u>t</u>","<u>Co</u>w","Do<u>g</u>","Wa<u>l</u>laby"}
 public class ShortestUniqueSubstringInArray {
     public static void main(String[] args) {
         List<String> input= Arrays.asList("Bird", "Cat", "Cow", "Dog", "Wallaby");
+       //List<String> input= Arrays.asList("Cat", "Catcatpillar");
         List<String> output=shortestUniqueSubstring(input);
         System.out.println(output);
     }
