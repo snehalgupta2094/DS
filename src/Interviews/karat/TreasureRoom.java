@@ -2,6 +2,7 @@ package Interviews.karat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -100,13 +101,32 @@ public class TreasureRoom {
                                     {"daisy", "violet"},
                                     {"iris", "violet"}};
         String[] treasure_rooms_1 = {"lily", "tulip", "violet", "rose"};
+        String[] treasure_rooms_2 = {"lily", "jasmin", "violet"};
+        String[][] instructions_2 = {{"jasmin", "tulip"},
+                                     {"lily", "tulip"},
+                                     {"tulip", "violet"},
+                                     {"violet", "violet"}};
+        String[] treasure_rooms_3 = {"violet"};
 
-        List<String> filteredRooms = filterRoomsOnDestination(instructions_1);
-        System.out.println(filteredRooms);
+        Set<String> filteredRooms = filterRoomsOnDestination(instructions_1);
+        List<String> filteredRoomList = filterRoomsOnSource(instructions_1, treasure_rooms_1, filteredRooms);
+        System.out.println(filteredRoomList);
+
+        filteredRooms = filterRoomsOnDestination(instructions_1);
+        filteredRoomList = filterRoomsOnSource(instructions_1, treasure_rooms_2, filteredRooms);
+        System.out.println(filteredRoomList);
+
+        filteredRooms = filterRoomsOnDestination(instructions_1);
+        filteredRoomList = filterRoomsOnSource(instructions_1, treasure_rooms_2, filteredRooms);
+        System.out.println(filteredRoomList);
+
+        filteredRooms = filterRoomsOnDestination(instructions_2);
+        filteredRoomList = filterRoomsOnSource(instructions_2, treasure_rooms_3, filteredRooms);
+        System.out.println(filteredRoomList);
     }
 
-    public static List<String> filterRoomsOnDestination(String[][] instructions){
-        List<String> filteredRooms = new ArrayList<>();
+    public static Set<String> filterRoomsOnDestination(String[][] instructions){
+        Set<String> filteredRooms = new HashSet<>();
         Map<String, List<String>> roomMap = new HashMap<>();
 
         for(int index = 0; index < instructions.length; index++){
@@ -131,4 +151,22 @@ public class TreasureRoom {
         return filteredRooms;
     }
 
+    public static List<String> filterRoomsOnSource(String[][] instructions, String[] treasure_rooms, Set<String> filteredRooms){
+        List<String> filteredRoomList = new ArrayList<>();
+        Set<String> treasureRooms = new HashSet<>();
+
+        for(String treasureRoom : treasure_rooms){
+            treasureRooms.add(treasureRoom);
+        }
+
+        for(int index = 0; index < instructions.length; index++){
+            String sourceRoom = instructions[index][0];
+            String destinationRoom = instructions[index][1];
+
+            if(filteredRooms.contains(sourceRoom) && treasureRooms.contains(destinationRoom)){
+                filteredRoomList.add(sourceRoom);
+            }
+        }
+        return filteredRoomList;
+    }
 }
