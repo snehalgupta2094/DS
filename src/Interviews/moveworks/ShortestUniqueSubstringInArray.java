@@ -1,4 +1,4 @@
-package Interviews;
+package Interviews.moveworks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
