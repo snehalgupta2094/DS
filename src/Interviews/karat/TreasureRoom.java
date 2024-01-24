@@ -116,10 +116,6 @@ public class TreasureRoom {
         filteredRoomList = filterRoomsOnSource(instructions_1, treasure_rooms_2, filteredRooms);
         System.out.println(filteredRoomList);
 
-        filteredRooms = filterRoomsOnDestination(instructions_1);
-        filteredRoomList = filterRoomsOnSource(instructions_1, treasure_rooms_2, filteredRooms);
-        System.out.println(filteredRoomList);
-
         filteredRooms = filterRoomsOnDestination(instructions_2);
         filteredRoomList = filterRoomsOnSource(instructions_2, treasure_rooms_3, filteredRooms);
         System.out.println(filteredRoomList);
