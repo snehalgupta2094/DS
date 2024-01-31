@@ -132,6 +132,11 @@ public class SecuritySystem {
                 {"Raj", "enter"},
                 };
         fetchBadgedEmployees(records4);
+
+        String[][] records5 = {
+                {"Paul", "exit"}
+                };
+        fetchBadgedEmployees(records5);
     }
 
     public static void fetchBadgedEmployees(String[][] records){
