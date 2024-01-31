@@ -1,6 +1,7 @@
 package Interviews.karat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -52,6 +53,7 @@ public class ParentsOfNode {
         Set<Integer> ancestors2 = findAncestors(childParentMap, 3);
         System.out.println(ancestors1);
         System.out.println(ancestors2);
+        System.out.println(!Collections.disjoint(ancestors1, ancestors2));
 
         System.out.println("====Output 2===");
         int[][] relationship1 = {{1,3}, {2,3}, {4,2}, {4,7}};
@@ -62,6 +64,7 @@ public class ParentsOfNode {
         Set<Integer> ancestors4 = findAncestors(childParentMap1, 7);
         System.out.println(ancestors3);
         System.out.println(ancestors4);
+        System.out.println(!Collections.disjoint(ancestors3, ancestors4));
 
     }
     public static Map<Integer, List<Integer>> createRelationshipMap(int[][] relationship){
