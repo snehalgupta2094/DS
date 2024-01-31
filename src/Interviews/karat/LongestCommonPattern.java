@@ -16,4 +16,8 @@ Follow up question: Optimal way to get list of users (2 or more) which have the 
 * */
 public class LongestCommonPattern {
 
+    public static void main(String[] args) {
+
+    }
+
 }
